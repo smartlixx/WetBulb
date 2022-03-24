@@ -42,6 +42,11 @@
 #
 # Ported to Python by Xianxiang Li
 # February 2, 2019
+#
+# March 24, 2022
+# Small bug fix from Manuel Theurl: Fixed that iteration has been done until maxiter all the time
+# -> much faster code execution
+
 
 
 import numpy as np
@@ -349,7 +354,7 @@ def WetBulb(TemperatureC,Pressure,Humidity,HumidityMode=0):
         subdo = np.where(np.abs(delta)>convergence) #find(abs(delta)>convergence)
 
         iter = 0
-        while (len(subdo)>0) and (iter<=maxiter):
+        while (len(subdo[0])>0) and (iter<=maxiter):
             iter = iter + 1
             
             wb_temp[subdo] = wb_temp[subdo] - 0.1*delta[subdo]
